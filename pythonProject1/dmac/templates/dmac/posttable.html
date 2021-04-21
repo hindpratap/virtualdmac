@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<!--      <style>-->
+<!--#div1 {-->
+<!--  width: 350px;-->
+<!--  height: 70px;-->
+<!--  padding: 10px;-->
+<!--  border: 1px solid #aaaaaa;-->
+<!--}-->
+<!--</style>-->
+<!--<script>-->
+<!--function allowDrop(ev) {-->
+<!--  ev.preventDefault();-->
+<!--}-->
+
+<!--function drag(ev) {-->
+<!--  ev.dataTransfer.setData("text", ev.target.id);-->
+<!--}-->
+
+<!--function drop(ev) {-->
+<!--  ev.preventDefault();-->
+<!--  var data = ev.dataTransfer.getData("text");-->
+<!--  ev.target.appendChild(document.getElementById(data));-->
+<!--}-->
+<!--</script>-->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+
+{% load staticfiles %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'dmac/css/dragdrop.css' %}">
+    <title>Hello, world!</title>
+<!--      <style>-->
+<!--table {-->
+<!--    font-size: 11px;-->
+<!--    border-collapse:collapse;-->
+<!--    border:1px solid-->
+<!--}-->
+<!--table td, table th {-->
+<!--    border:1px solid;-->
+<!--    padding: 3px 5px 3px 5px;-->
+<!--}-->
+
+<!--.tableHead{-->
+<!--    background:#aaa;-->
+<!--    cursor:pointer-->
+<!--}-->
+
+<!--.draggedDiv {-->
+<!--    position:absolute;-->
+<!--    background:#eee;-->
+<!--}-->
+
+<!--.dragging {-->
+<!--    background:#eee;-->
+<!--    color:#000-->
+<!--}-->
+
+<!--.hovering {-->
+<!--    background:#ccc;-->
+<!--    color:#555-->
+<!--}-->
+<!--</style>-->
+<script src='https://code.jquery.com/jquery-3.2.1.slim.js'
+        integrity='sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg=' crossorigin='anonymous'></script>
+<!--<script>-->
+<!--// JQuery-->
+<!--$(function() {-->
+<!--    var heads = $("#tableOne th");-->
+
+<!--    $.each(heads, function(inx, row ) {-->
+<!--        var head = $(row);-->
+<!--        head.bind( "selectstart", function() { return false });-->
+<!--        head.bind( "mousedown", mousedown);-->
+<!--        head.bind( "mouseover", mouseover);-->
+<!--        head.bind( "mouseout", mouseout);-->
+<!--        head.bind( "mouseup", mouseup);-->
+
+<!--        head.addClass("tableHead");-->
+<!--    });-->
+<!--    $(document.documentElement).bind( "mouseup", documentMouseup);-->
+<!--    $(document.documentElement).bind( "mousemove", documentMouseMove);-->
+<!--});-->
+
+<!--function documentMouseup(ev){-->
+<!--    if (!dragTD) { return;}-->
+
+<!--    $(dragTD).removeClass("dragging");-->
+<!--    dragTD = null;-->
+<!--    draggedDiv.remove();-->
+<!--    draggedDiv = null;-->
+<!--}-->
+
+<!--function documentMouseMove(ev){-->
+<!--    if (!draggedDiv) { return;}-->
+
+<!--    draggedDiv.css({top: ev.pageY + 5 + "px", left: ev.pageX + 10 + "px"});-->
+<!--}-->
+
+<!--var dragTD = null, draggedDiv=null;-->
+<!--function mousedown(ev){-->
+<!--    dragTD = this;-->
+<!--    $(this).addClass("dragging");-->
+
+<!--    draggedDiv = $("<div>");-->
+<!--    draggedDiv.addClass("draggedDiv");-->
+<!--    draggedDiv.css({top: ev.pageY + 5 + "px", left:ev.pageX + 10 + "px"});-->
+<!--    $(document.documentElement).append(draggedDiv);-->
+
+<!--    var dragTable = $("<table>");-->
+<!--    draggedDiv.append(dragTable);-->
+
+<!--    var srcInx = dragTD.cellIndex;-->
+<!--    var rows = $("#tableOne tr");-->
+
+<!--    for (var x=0; x<rows.length; x++) {-->
+<!--        var tr = rows[x].cloneNode(false);-->
+<!--        dragTable.append(tr);-->
+<!--        var tds = rows[x].cells[srcInx].cloneNode(true);-->
+<!--        tr.appendChild(tds);-->
+<!--    }-->
+<!--}-->
+
+<!--function mouseover(ev){-->
+<!--    if (dragTD === null) { return;}-->
+<!--    $(this).addClass("hovering");-->
+<!--}-->
+
+<!--function mouseout(ev){-->
+<!--    if (dragTD === null) { return;}-->
+<!--    $(this).removeClass("hovering");-->
+<!--}-->
+
+<!--function mouseup(ev){-->
+<!--    $(this).removeClass("hovering");-->
+<!--    $(dragTD).removeClass("dragging");-->
+<!--    draggedDiv.remove();-->
+<!--    draggedDiv = null;-->
+
+<!--    var srcInx = dragTD.cellIndex;-->
+<!--    var tarInx = this.cellIndex;-->
+<!--    var rows = $("#tableOne tr");-->
+
+<!--    for (var x=0; x<rows.length; x++) {-->
+<!--        tds = rows[x].cells;-->
+<!--        rows[x].insertBefore(tds[srcInx], tds[tarInx])-->
+<!--    }-->
+
+<!--    dragTD = null;-->
+<!--}-->
+
+<!--</script>-->
+  </head>
+  <body style="background-image: url('https://bccs.tech/wp-content/uploads/2020/05/SAP-Kicks-Off-First-SAP.jpg');height:100%;width:100%">
+  <div class="container" style="background-color: #A4A4A4;height:790px; width:1500px border-style:double;">
+
+      <div class="row" style="height:150px"> <center><h1 style="margin-top:30px; font-size:70px;font-family:coperplate"> <b>Welcome to Dmac</b>
+          </h1></center>
+          <a href="\" class=" uk-flex uk-flex-center uk-flex-middle"><p style="margin-left:1210px;margin-bottom:40px"><b>Logout</b></p></a>
+
+      </div>
+
+        <div class="row">
+            <div class="col-2" style="background-color:#F8E0F1; border-style:double;"><center><h1>Table Names</h1></center>
+                <div class="row" style="overflow:auto; height:600px;">
+                {% for i in tablename_list %}
+                <p><h4><b>{{ i }}</b></h4></p>
+                {% endfor %}
+                    </div>
+
+<!--                <div class="row" >-->
+<!--                    <p><h3>Table 1</h3></p>-->
+<!--                        <form action = "" method = "POST" enctype="multipart/form-data" >-->
+<!--                            {% csrf_token %}-->
+
+<!--                        <div class="uk-form-controls uk-flex">-->
+<!--                            <select name="table_name" id="caseCheck" class="uk-select uk-margin-right uk-flex-1" placeholder="Table1">-->
+<!--                                <option value="Selected"> -&#45;&#45;Select Table-&#45;&#45;</option>-->
+<!--                                {% for i in tablename_list %}-->
+<!--                                <option value="{{ i }}">{{ i }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                            <div style = "max-width:470px;">-->
+<!--                            <center>-->
+
+<!--                           <button class="btn btn-secondary" style = "border:0px; background-color:#4285F4; margin-top:8%;-->
+<!--                              height:35px; width:80%;margin-left:19%;" type = "submit"-->
+<!--                              value = "Login" >-->
+<!--                              <strong>Submit</strong>-->
+<!--                           </button>-->
+
+<!--                             </center>-->
+<!--                        </div></form>-->
+<!--                    </div>&nbsp;&nbsp;-->
+<!--                             <div style="overflow-x:auto;overflow-y:auto">-->
+<!--                               <table class="table table-striped table-hover">-->
+<!--                                    {% for i in columns %}-->
+<!--                                <th>{{ i }}</th>{% endfor %}-->
+<!--                                {% for j in values %}-->
+<!--                                <tr> {% for k in j %}-->
+<!--                                    <td>{{ k }}</td>{% endfor %}</tr>-->
+<!--                                   {% endfor %}</table></div>-->
+<!--&lt;!&ndash;                    <div class="accordion accordion-flush" id="accordionFlushExample">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div class="accordion-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h2 class="accordion-header" id="flush-headingOne">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Accordion Item #1&ndash;&gt;-->
+<!--&lt;!&ndash;                          </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </h2>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <div class="accordion-body" style="overflow-y:auto">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <table class="table table-striped table-hover">&ndash;&gt;-->
+<!--&lt;!&ndash;                      {% for i in columns %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <th>{{ i }}</th>{% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    {% for j in values %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <tr> {% for k in j %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <td>{{ k }}</td>{% endfor %}</tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    {% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </table>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                                <p><h3>Table 2</h3></p>-->
+<!--                            <form action = "" method = "POST" enctype="multipart/form-data" >-->
+<!--                            {% csrf_token %}-->
+
+<!--                            <div class="uk-form-controls uk-flex">-->
+<!--                            <select name="table_name1" id="caseCheck" class="uk-select uk-margin-right uk-flex-1" placeholder="Table1">-->
+<!--                                <option value="Selected"> -&#45;&#45;Select Table-&#45;&#45;</option>-->
+<!--                                {% for i in tablename_list %}-->
+<!--                                <option value="{{ i }}">{{ i }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                  <div style = "max-width:470px;">-->
+<!--                <center>-->
+
+<!--                <button class="btn btn-secondary" style = "border:0px; background-color:#4285F4; margin-top:8%;-->
+<!--                  height:35px; width:80%;margin-left:19%;" type = "submit"-->
+<!--                  value = "Login" >-->
+<!--                  <strong>Submit</strong>-->
+<!--               </button>-->
+
+<!--                </center>-->
+<!--                </div></form>&nbsp;&nbsp;-->
+
+<!--                                <div style="overflow-x:auto;overflow-y:auto">-->
+<!--               <table class="table table-striped table-hover">-->
+<!--                    {% for i in columns1 %}-->
+<!--                <th>{{ i }}</th>{% endfor %}-->
+<!--                {% for j in values1 %}-->
+<!--                <tr> {% for k in j %}-->
+<!--                    <td>{{ k }}</td>{% endfor %}</tr>-->
+<!--                {% endfor %}-->
+
+
+
+<!--                </table>-->
+<!--                    </div>-->
+
+<!--                        <div class="row">-->
+<!--                        <p><h3>Table 3</h3></p>-->
+<!--                        <form action = "" method = "POST" enctype="multipart/form-data" >-->
+<!--                        {% csrf_token %}-->
+<!--                            <div class="uk-form-controls uk-flex">-->
+<!--                            <select name="table_name1" id="caseCheck" class="uk-select uk-margin-right uk-flex-1" placeholder="Table1">-->
+<!--                                <option value="Selected"> -&#45;&#45;Select Table-&#45;&#45;</option>-->
+<!--                                {% for i in tablename_list %}-->
+
+<!--                                <option value="{{ i }}">{{ i }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                                          <div style = "max-width:470px;">-->
+<!--                                    <center>-->
+
+<!--                                       <button class="btn btn-secondary" style = "border:0px; background-color:#4285F4; margin-top:8%;-->
+<!--                                          height:35px; width:80%;margin-left:19%;" type = "submit"-->
+<!--                                          value = "Login" >-->
+<!--                                          <strong>Submit</strong>-->
+<!--                                       </button>-->
+
+<!--                                    </center>-->
+<!--                                          </div></form></div>&nbsp;&nbsp;-->
+<!--                <div style="overflow-x:auto;overflow-y:auto">-->
+<!--                                       <table class="table table-striped table-hover">-->
+<!--                          {% for i in columnsx %}-->
+<!--                                        <th>{{ i }}</th>{% endfor %}-->
+<!--                                        {% for j in valuesx %}-->
+<!--                                        <tr> {% for k in j %}-->
+<!--                                            <td>{{ k }}</td>{% endfor %}</tr>-->
+<!--                                        {% endfor %}-->
+
+
+
+<!--                                </table></div>-->
+
+
+
+            </div>
+                <div class="col-5" style="background-color:#E6E6E6; border-style:double;"><center><h1>Merge Tables</h1></center>
+                         <div class="row">
+
+<!--                             <div class="uk-margin">-->
+<!--                        <label for="" class="uk-form-label">Table name</label>-->
+<!--                        <div class="uk-form-controls">-->
+<!--                            <select data-placeholder="select query owner" name="query_owner[]" multiple class="chosen-select uk-select dis" >-->
+<!--                                {% for i in tablename_list %}-->
+<!--                                    <option value="{{ i }}">({{ i }})</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<form action="{% url 'dmac:post' %}" method="POST" class="form" enctype="multipart/form-data" id="issueForm">
+                {% csrf_token %}
+                             <fieldset class="uk-fieldset uk-padding uk-card uk-card-default my--display" data-class="form-fieldset">
+                             <legend class="uk-legend uk-margin-bottom uk-flex uk-flex-center uk-flex-middle">
+                             <select  name="tablename"  class="form-select" multiple aria-label=" multiple select example">
+
+       {% for i in tablename_list %}
+                                 <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+</select>
+
+                       </legend>  <p class="uk-margin">
+
+                    <button name="submit" class="uk-button success-btn">Submit</button>
+                </p></fieldset>
+
+</form>
+
+<!--                             <div class="uk-margin uk-hidden">-->
+<!--		<textarea class="uk-textarea selected-list" name="json_items" rows="5" placeholder="Textarea"></textarea>-->
+<!--	</div>-->
+<!--                             <div class="uk-margin-top">-->
+<!--		<label for="" class="uk-form-label">Select Modules (With drag-n-drop)</label>-->
+<!--	</div>-->
+<!--	<input type="text" name="page_contents[]" data-options='{{ module_dict }}'-->
+<!--		data-selected='[]'-->
+<!--		data-field-title="<span uk-icon='icon: folder'></span> Available Modules"-->
+<!--		data-selected-title="<span uk-icon='icon: star'></span> Selected Modules"-->
+<!--		class="dragableMultiselect">-->
+<!--                 <form action = "" method = "POST" enctype="multipart/form-data" >-->
+<!--                {% csrf_token %}-->
+
+<!--                     <div class="uk-form-controls uk-flex"><center>-->
+<!--                            <select name="table_name1" id="caseCheck" class="uk-select uk-margin-right uk-flex-1" placeholder="Table1">-->
+<!--                                <option value="Selected"> -&#45;&#45;Select Table 1-&#45;&#45;</option>-->
+<!--                                {% for i in tablename_list %}-->
+<!--                                <option value="{{ i }}">{{ i }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <div class="uk-form-controls uk-flex">&ndash;&gt;-->
+<!--                            <select name="table_name2" id="caseCheck" class="uk-select uk-margin-right uk-flex-1" placeholder="Table1">-->
+<!--                                <option value="Selected"> -&#45;&#45;Select Table 2-&#45;&#45;</option>-->
+<!--                                {% for i in tablename_list %}-->
+<!--                                <option value="{{ i }}">{{ i }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select></center>-->
+<!--                        </div>-->
+
+<!--           <div style = "max-width:470px;">-->
+<!--            <center>-->
+
+<!--               <button  class="btn btn-secondary" style = "border:0px; margin-top:8%;-->
+<!--                  height:35px; width:80%;margin-left:49%;" type = "submit"-->
+<!--                  value = "Login" >-->
+<!--                  <strong>Submit</strong>-->
+<!--               </button>-->
+
+<!--            </center>-->
+<!--           </div></form>-->
+
+      </div>&nbsp;&nbsp;
+<!--                    <div class="accordion accordion-flush" id="accordionFlushExample">-->
+<!--                      <div class="accordion-item">-->
+<!--                        <h2 class="accordion-header" id="flush-headingOne">-->
+<!--                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">-->
+<!--                            Table Details-->
+<!--                          </button>-->
+<!--                        </h2>-->
+<!--                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">-->
+<!--                          <div class="accordion-body" style="overflow-y:auto">-->
+<!--                                <table class="table table-striped table-hover">-->
+<!--                      {% for i in columns2 %}-->
+<!--                                    <th>{{ i }}</th>{% endfor %}-->
+<!--                                    {% for j in values2 %}-->
+<!--                                    <tr> {% for k in j %}-->
+<!--                                    <td>{{ k }}</td>{% endfor %}-->
+<!--                                    {% endfor %}-->
+<!--                                    </table>-->
+
+<!--                          </div>-->
+<!--                        </div></div>-->
+<!--                    </div>-->
+<!--                    <div style="overflow-x:auto;overflow-y:auto">-->
+<!--         <table id="tableOne" class="table table-striped table-hover" >-->
+<!--  {% for i in columnss1 %}-->
+<!--                <th>{{ i }}</th>{% endfor %}-->
+<!--                {% for j in valuess1 %}-->
+<!--                <tr> {% for k in j %}-->
+<!--                    <td>{{ k }}</td>{% endfor %}</tr>-->
+
+<!--                {% endfor %}-->
+
+<!--                </table></div>-->
+<!--                           <div style="overflow-x:auto;overflow-y:auto">-->
+<!--         <table id="tableOne" class="table table-striped table-hover" >-->
+<!--  {% for i in columnss2 %}-->
+<!--                <th>{{ i }}</th>{% endfor %}-->
+<!--                {% for j in valuess2 %}-->
+<!--                <tr> {% for k in j %}-->
+<!--                    <td>{{ k }}</td>{% endfor %}</tr>-->
+
+<!--                {% endfor %}-->
+
+<!--                </table></div>-->
+
+<!--Val-->
+
+<!--                     <div style="overflow-x:auto;overflow-y:auto">-->
+
+<!--{% for key1, value1 in d_columns.items %}-->
+
+<!--         <table id="" class="table table-striped table-hover" >-->
+
+<!--{% for key2, value2 in d_values.items %}-->
+<!--             {% if key1 == key2 %}-->
+<!--  {% for i in value1 %}-->
+<!--                <th>{{ i }}</th>{% endfor %}-->
+
+<!--                {% for j in value2 %}-->
+<!--                <tr> {% for k in j %}-->
+<!--                    <td>{{ k }}</td>{% endfor %}</tr>-->
+
+<!--{% endfor %}-->
+
+<!--{% endif %}-->
+<!--             {% endfor %}-->
+<!--                </table>{% endfor %}</div>-->
+
+
+
+                    <div id="table2" style="overflow-x:auto;overflow-y:auto; height:500px">
+        <h2>Table1</h2>
+        <table>
+             <thead>
+             {% for i in stick1 %}
+            <td draggable="true" ondragstart="drag(event, 1)">{{ i }}</td>
+           {% endfor %}
+          </thead>
+            <tbody id="tb1"></tbody>
+        </table>
+      </div>
+      <div id="table2" style="overflow-x:auto;overflow-y:auto; height:500px;">
+        <h2>Table2</h2>
+        <table>
+           <thead>
+             {% for i in stick2 %}
+            <td draggable="true" ondragstart="drag(event, 2)">{{ i }}</td>
+           {% endfor %}
+          </thead>
+            <tbody id="tb2"></tbody>
+
+        </table>
+      </div>
+<!--EndVal-->
+
+
+
+
+                    ## this is for show table columns
+                    <form action="{% url 'dmac:rest' %}" method="POST" class="form" enctype="multipart/form-data" id="issueForm">
+                {% csrf_token %}
+                    <fieldset class="uk-fieldset uk-padding uk-card uk-card-default my--display" data-class="form-fieldset">
+                             <legend class="uk-legend uk-margin-bottom uk-flex uk-flex-center uk-flex-middle">
+                             <select  name="tablename"  class="form-select" multiple aria-label=" multiple select example">
+       {% for i in lists %}
+                                 <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+</select>
+
+                       </legend>  <p class="uk-margin">
+<!--<div class="input-group mb-3">-->
+<!--  <span class="input-group-text" id="basic-addon1">@</span>-->
+<!--  <input type="text" name="desc" class="form-control" placeholder="Target Table Name" aria-label="Username" aria-describedby="basic-addon1">-->
+<!--</div>-->
+
+                    <button name="submit" class="uk-button success-btn">Submit</button>
+                </p></fieldset>
+                    </form>
+
+
+
+
+
+
+
+                </div>
+            <div class="col-5" style="background-color:#E6E6E6; border-style:double;"><center><h1>Target Table</h1></center>
+                <div class="row">
+                    </table></div>
+                           <div style="overflow-x:auto;overflow-y:auto">
+         <table id="tableOne" class="table table-striped table-hover" >
+  {% for i in columnsld %}
+                <th>{{ i }}</th>{% endfor %}
+                {% for j in valuesld %}
+                <tr> {% for k in j %}
+                    <td>{{ k }}</td>{% endfor %}</tr>
+
+                {% endfor %}
+
+                </table>
+                               <form method="POST" action="{% url 'dmac:thankyou' %}" id="tableData">
+                                   {% csrf_token %}
+                                        <div id="content">
+
+                                        <div style="overflow-x:auto;overflow-y:auto;height:600px;">
+                                        <h2>Table3</h2>
+                                        <table id="tb3" name="thakur"></table>
+                                      </div>
+                                        <textarea name="jsonData" id="jsonDump" style="display:none;"></textarea>
+                                    </div>
+                                    <legend class="uk-legend uk-margin-bottom uk-flex uk-flex-center uk-flex-middle">
+                                        <h2>APPLY RULES</h2>
+                             <select  name="rules"  class="form-select" multiple aria-label=" multiple select example">
+                                 <option value="name_spliter">Name spliter</option>
+                                 <option value="first+last">first+last</option>
+                                 <option value="string resizer">string resizer</option>
+
+                                </select>
+
+                                      </legend>  <p class="uk-margin">
+
+                                    <button type="submit"  class="uk-button success-btn">Send to Target Database</button>
+                                </form>
+                </div>
+
+
+</div>
+
+        </div>
+  </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="{% static 'dmac/js/dragdrop.js' %}"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+  <style>
+      table {
+        border-collapse: collapse;
+      }
+      table td {
+        border: 1px solid;
+        padding: 5px 10px;
+      }
+      table thead td {
+        font-weight: bold;
+      }
+    </style>
+    <script type="text/javascript">
+var data1 = JSON.parse("{{tab1|escapejs}}");
+var data2 = JSON.parse("{{tab2|escapejs}}");
+<!--      var data1 = [-->
+<!--        {-->
+<!--          Name: "Kartik Chauhan",-->
+<!--          Skills: "Frontend Consultant",-->
+<!--          Technology: "Angular",-->
+<!--          TaxID: 11221,-->
+<!--          City: "Varanasi",-->
+<!--          CountryCode: 91,-->
+<!--          Phone: 343423423,-->
+<!--          Address: "bbbbbb",-->
+<!--          Email: "cpandey@mckinsol.com",-->
+<!--        },-->
+<!--        {-->
+<!--          Name: "Chandan Pandey",-->
+<!--          Skills: "Frontend Consultant",-->
+<!--          Technology: "Angular",-->
+<!--          TaxID: 45566,-->
+<!--          City: "Edison NJ",-->
+<!--          CountryCode: 1,-->
+<!--          Phone: 12345522,-->
+<!--          Address: "bbbbbb",-->
+<!--          Email: "panday@mckinsol.com",-->
+<!--        },-->
+<!--        {-->
+<!--          Name: "Anurag Varshney",-->
+<!--          Skills: "SAP Consultant",-->
+<!--          Technology: "SAP S/4 Fashion",-->
+<!--          TaxID: 12345,-->
+<!--          City: "Edison NJ",-->
+<!--          CountryCode: 1,-->
+<!--          Phone: 7323190072,-->
+<!--          Address: "bbbbbb",-->
+<!--          Email: "avarshney@mckinsol.com",-->
+<!--        },-->
+<!--        {-->
+<!--          Name: "Abhinav Asati",-->
+<!--          Skills: "Frontend Consultant",-->
+<!--          Technology: "Angular",-->
+<!--          TaxID: 23456,-->
+<!--          City: "Smbalpur",-->
+<!--          CountryCode: 91,-->
+<!--          Phone: 123455,-->
+<!--          Address: "bbbbbb",-->
+<!--          Email: "aasati@mckinsol.com",-->
+<!--        },-->
+<!--        {-->
+<!--          Name: "Sukirti Mishra",-->
+<!--          Skills: "Frontend Consultant",-->
+<!--          Technology: "Angular",-->
+<!--          TaxID: 34567,-->
+<!--          City: "Chatarpur",-->
+<!--          CountryCode: 91,-->
+<!--          Phone: 34567,-->
+<!--          Address: "bbbbbb",-->
+<!--          Email: "smishra@mckinsol.com",-->
+<!--        },-->
+<!--      ];-->
+
+<!--      var data2 = [-->
+<!--        {-->
+<!--          Name: "AAA",-->
+<!--          Gender: "Male",-->
+<!--          Age: "18",-->
+<!--          Address: "aaaaa",-->
+<!--          History: "Haaaaaa",-->
+<!--          Phone: 1111111,-->
+<!--        },-->
+<!--        {-->
+<!--          Name: "Abhinav Asati",-->
+<!--          Gender: "Female",-->
+<!--          Age: "28",-->
+<!--          Address: "bbbbbb",-->
+<!--          History: "Hbbbb",-->
+<!--          Phone: 222222,-->
+<!--        },-->
+<!--        {-->
+<!--          Name: "CCC",-->
+<!--          Gender: "Male",-->
+<!--          Age: "10",-->
+<!--          Address: "cccccc",-->
+<!--          History: "Hccccc",-->
+<!--          Phone: 333333,-->
+<!--        },-->
+<!--      ];-->
+
+      var data3 = [];
+
+      let arr = [];
+      let count1 = 0,
+        count2 = 0;
+      let field, fromIndex;
+      var cols1 = data1.length > 0 ? Object.keys(data1[0]) : [];
+      var cols2 = data2.length > 0 ? Object.keys(data2[0]) : [];
+      var cols3 = ["No"];
+
+      function deployData() {
+        var tbdata1 = "",
+          tbdata2 = "",
+          tbdata3 = "";
+
+        for (let j = 0; j < data1.length; j++) {
+          tbdata1 += "<tr>";
+          for (let x = 0; x < cols1.length; x++) {
+            tbdata1 += "<td>" + data1[j][cols1[x]] + "</td>";
+          }
+          tbdata1 += "</tr>";
+        }
+
+        for (let j = 0; j < data2.length; j++) {
+          tbdata2 += "<tr>";
+          for (let x = 0; x < cols2.length; x++) {
+            tbdata2 += "<td>" + data2[j][cols2[x]] + "</td>";
+          }
+          tbdata2 += "</tr>";
+        }
+
+        tbdata3 += "<thead>";
+        for (let k = 0; k < cols3.length; k++) {
+          tbdata3 +=
+            "<td draggable='true' ondragstart='drag(event, 3)' ondrop='drop(event)' ondragover='allowDrop(event)'>" +
+            cols3[k] +
+            "</td>";
+        }
+        tbdata3 += "</thead>";
+        for (let j = 0; j < data3.length; j++) {
+          tbdata3 += "<tr>";
+          for (let x = 0; x < cols3.length; x++) {
+            tbdata3 += "<td>" + data3[j][cols3[x]] + "</td>";
+          }
+          tbdata3 += "</tr>";
+        }
+        document.getElementById("tb1").innerHTML = tbdata1;
+        document.getElementById("tb2").innerHTML = tbdata2;
+        document.getElementById("tb3").innerHTML = tbdata3;
+
+        field = "";
+        fromIndex = 0;
+      }
+
+      deployData();
+
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      function drag(e, i) {
+        fromIndex = i;
+        field = e.target.innerHTML;
+      }
+      function drop(e) {
+        e.preventDefault();
+
+        if (field == "{{ k1 }}" && fromIndex == 1 && arr.indexOf("table1") == -1) {
+          arr.push("table1");
+        }
+
+        if (field == "{{ k2 }}" && fromIndex == 2 && arr.indexOf("table2") == -1) {
+          arr.push("table2");
+        }
+
+        if (arr.indexOf("table1") == -1 && field !== "{{ k1 }}" && fromIndex == 1) {
+          alert("Please drag '{{ k1 }}' column from table A");
+          return;
+        }
+
+        if (arr.indexOf("table2") == -1 && field !== "{{ k2 }}" && fromIndex == 2) {
+          alert("Please drag '{{ k2 }}' column from table B");
+          return;
+        }
+
+        if (
+          (count1 == 6 && fromIndex == 1) ||
+          (count2 == 6 && fromIndex == 2)
+        ) {
+          return;
+        }
+
+        if (count1 < 4 && fromIndex == 1) {
+          count1++;
+        }
+
+        if (count2 < 3 && fromIndex == 2) {
+          count2++;
+        }
+
+        var targetField = e.target.innerHTML;
+        var index = cols3.indexOf(targetField);
+
+        if (fromIndex == 3) {
+          var ind = cols3.indexOf(field);
+          cols3.splice(ind, 1);
+          if (ind < index) {
+            cols3.splice(index, 0, field);
+          } else {
+            cols3.splice(index + 1, 0, field);
+          }
+        } else {
+          if (cols3.indexOf(field) == -1) {
+            cols3.splice(index + 1, 0, field);
+          }
+          data3 = [];
+          let d1 = [],
+            d2 = [];
+          if (arr.length > 0) {
+            if (arr[0] == "table1") {
+              d1 = data1;
+            } else {
+              d1 = data2;
+            }
+          }
+          if (arr.length > 1) {
+            if (arr[1] == "table1") {
+              d2 = data1;
+            } else {
+              d2 = data2;
+            }
+          }
+
+          for (let i = 0; i < d1.length; i++) {
+            data3.push({ No: i + 1 });
+          }
+          for (let k = 0; k < d2.length; k++) {
+            data3.push({ No: k + d1.length + 1 });
+          }
+
+          for (let j = 0; j < data3.length; j++) {
+            if (j < d1.length) {
+              for (let x = 0; x < cols3.length; x++) {
+                if (cols3[x] !== "No") {
+                  data3[j][cols3[x]] =
+                    d1[j][cols3[x]] !== undefined ? d1[j][cols3[x]] : "";
+                }
+              }
+            } else {
+              for (let x = 0; x < cols3.length; x++) {
+                if (cols3[x] !== "No") {
+                  data3[j][cols3[x]] =
+                    d2[j - d1.length][cols3[x]] !== undefined
+                      ? d2[j - d1.length][cols3[x]]
+                      : "";
+                }
+              }
+            }
+          }
+        }
+        deployData();
+      }
+
+    </script>
+
+  <script>
+      const tableData = document.querySelector('#tableData');
+      tableData.addEventListener('submit', (e) => tableSubmission(e));
+
+      function tableSubmission(e) {
+        e.preventDefault();
+        const textArea = document.querySelector('#jsonDump');
+        textArea.innerHTML = JSON.stringify(data3);
+        setTimeout(() => {
+            e.target.submit();
+        }, 200);
+      }
+  </script>
+  </body>
+</html>

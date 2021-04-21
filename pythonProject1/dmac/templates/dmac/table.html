@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div id="content">
+      <div>
+        <h2>Table A</h2>
+        <table>
+          <thead>
+            <td draggable="true" ondragstart="drag(event, 1)">Name</td>
+            <td draggable="true" ondragstart="drag(event, 1)">Skills</td>
+            <td draggable="true" ondragstart="drag(event, 1)">Technology</td>
+            <td draggable="true" ondragstart="drag(event, 1)">TaxID</td>
+            <td draggable="true" ondragstart="drag(event, 1)">City</td>
+            <td draggable="true" ondragstart="drag(event, 1)">CountryCode</td>
+            <td draggable="true" ondragstart="drag(event, 1)">Address</td>
+            <td draggable="true" ondragstart="drag(event, 1)">Phone</td>
+            <td draggable="true" ondragstart="drag(event, 1)">Email</td>
+          </thead>
+          <tbody id="tb1"></tbody>
+        </table>
+      </div>
+      <div>
+        <h2>Table B</h2>
+        <table>
+          <thead>
+            <td draggable="true" ondragstart="drag(event, 2)">Name</td>
+            <td draggable="true" ondragstart="drag(event, 2)">Gender</td>
+            <td draggable="true" ondragstart="drag(event, 2)">Age</td>
+            <td draggable="true" ondragstart="drag(event, 2)">Address</td>
+            <td draggable="true" ondragstart="drag(event, 2)">History</td>
+            <td draggable="true" ondragstart="drag(event, 2)">Phone</td>
+          </thead>
+          <tbody id="tb2"></tbody>
+        </table>
+      </div>
+      <div>
+        <h2>Table3</h2>
+        <table id="tb3"></table>
+      </div>
+    </div>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      table td {
+        border: 1px solid;
+        padding: 5px 10px;
+      }
+      table thead td {
+        font-weight: bold;
+      }
+    </style>
+    <script type="text/javascript">
+      var data1 = [
+        {
+          Name: "Kartik Chauhan",
+          Skills: "Frontend Consultant",
+          Technology: "Angular",
+          TaxID: 11221,
+          City: "Varanasi",
+          CountryCode: 91,
+          Phone: 343423423,
+          Address: "bbbbbb",
+          Email: "cpandey@mckinsol.com",
+        },
+        {
+          Name: "Chandan Pandey",
+          Skills: "Frontend Consultant",
+          Technology: "Angular",
+          TaxID: 45566,
+          City: "Edison NJ",
+          CountryCode: 1,
+          Phone: 12345522,
+          Address: "bbbbbb",
+          Email: "panday@mckinsol.com",
+        },
+        {
+          Name: "Anurag Varshney",
+          Skills: "SAP Consultant",
+          Technology: "SAP S/4 Fashion",
+          TaxID: 12345,
+          City: "Edison NJ",
+          CountryCode: 1,
+          Phone: 7323190072,
+          Address: "bbbbbb",
+          Email: "avarshney@mckinsol.com",
+        },
+        {
+          Name: "Abhinav Asati",
+          Skills: "Frontend Consultant",
+          Technology: "Angular",
+          TaxID: 23456,
+          City: "Smbalpur",
+          CountryCode: 91,
+          Phone: 123455,
+          Address: "bbbbbb",
+          Email: "aasati@mckinsol.com",
+        },
+        {
+          Name: "Sukirti Mishra",
+          Skills: "Frontend Consultant",
+          Technology: "Angular",
+          TaxID: 34567,
+          City: "Chatarpur",
+          CountryCode: 91,
+          Phone: 34567,
+          Address: "bbbbbb",
+          Email: "smishra@mckinsol.com",
+        },
+      ];
+
+      var data2 = [
+        {
+          Name: "AAA",
+          Gender: "Male",
+          Age: "18",
+          Address: "aaaaa",
+          History: "Haaaaaa",
+          Phone: 1111111,
+        },
+        {
+          Name: "Abhinav Asati",
+          Gender: "Female",
+          Age: "28",
+          Address: "bbbbbb",
+          History: "Hbbbb",
+          Phone: 222222,
+        },
+        {
+          Name: "CCC",
+          Gender: "Male",
+          Age: "10",
+          Address: "cccccc",
+          History: "Hccccc",
+          Phone: 333333,
+        },
+      ];
+
+      var data3 = [];
+
+      let arr = [];
+      let count1 = 0,
+        count2 = 0;
+      let field, fromIndex;
+      var cols1 = data1.length > 0 ? Object.keys(data1[0]) : [];
+      var cols2 = data2.length > 0 ? Object.keys(data2[0]) : [];
+      var cols3 = ["No"];
+
+      function deployData() {
+        var tbdata1 = "",
+          tbdata2 = "",
+          tbdata3 = "";
+
+        for (let j = 0; j < data1.length; j++) {
+          tbdata1 += "<tr>";
+          for (let x = 0; x < cols1.length; x++) {
+            tbdata1 += "<td>" + data1[j][cols1[x]] + "</td>";
+          }
+          tbdata1 += "</tr>";
+        }
+
+        for (let j = 0; j < data2.length; j++) {
+          tbdata2 += "<tr>";
+          for (let x = 0; x < cols2.length; x++) {
+            tbdata2 += "<td>" + data2[j][cols2[x]] + "</td>";
+          }
+          tbdata2 += "</tr>";
+        }
+
+        tbdata3 += "<thead>";
+        for (let k = 0; k < cols3.length; k++) {
+          tbdata3 +=
+            "<td draggable='true' ondragstart='drag(event, 3)' ondrop='drop(event)' ondragover='allowDrop(event)'>" +
+            cols3[k] +
+            "</td>";
+        }
+        tbdata3 += "</thead>";
+        for (let j = 0; j < data3.length; j++) {
+          tbdata3 += "<tr>";
+          for (let x = 0; x < cols3.length; x++) {
+            tbdata3 += "<td>" + data3[j][cols3[x]] + "</td>";
+          }
+          tbdata3 += "</tr>";
+        }
+        document.getElementById("tb1").innerHTML = tbdata1;
+        document.getElementById("tb2").innerHTML = tbdata2;
+        document.getElementById("tb3").innerHTML = tbdata3;
+
+        field = "";
+        fromIndex = 0;
+      }
+
+      deployData();
+
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      function drag(e, i) {
+        fromIndex = i;
+        field = e.target.innerHTML;
+      }
+      function drop(e) {
+        e.preventDefault();
+
+        if (field == "Name" && fromIndex == 1 && arr.indexOf("table1") == -1) {
+          arr.push("table1");
+        }
+
+        if (field == "Name" && fromIndex == 2 && arr.indexOf("table2") == -1) {
+          arr.push("table2");
+        }
+
+        if (arr.indexOf("table1") == -1 && field !== "Name" && fromIndex == 1) {
+          alert("Please drag 'Name' column from table A");
+          return;
+        }
+
+        if (arr.indexOf("table2") == -1 && field !== "Name" && fromIndex == 2) {
+          alert("Please drag 'Name' column from table B");
+          return;
+        }
+
+        if (
+          (count1 == 4 && fromIndex == 1) ||
+          (count2 == 3 && fromIndex == 2)
+        ) {
+          return;
+        }
+
+        if (count1 < 4 && fromIndex == 1) {
+          count1++;
+        }
+
+        if (count2 < 3 && fromIndex == 2) {
+          count2++;
+        }
+
+        var targetField = e.target.innerHTML;
+        var index = cols3.indexOf(targetField);
+
+        if (fromIndex == 3) {
+          var ind = cols3.indexOf(field);
+          cols3.splice(ind, 1);
+          if (ind < index) {
+            cols3.splice(index, 0, field);
+          } else {
+            cols3.splice(index + 1, 0, field);
+          }
+        } else {
+          if (cols3.indexOf(field) == -1) {
+            cols3.splice(index + 1, 0, field);
+          }
+          data3 = [];
+          let d1 = [],
+            d2 = [];
+          if (arr.length > 0) {
+            if (arr[0] == "table1") {
+              d1 = data1;
+            } else {
+              d1 = data2;
+            }
+          }
+          if (arr.length > 1) {
+            if (arr[1] == "table1") {
+              d2 = data1;
+            } else {
+              d2 = data2;
+            }
+          }
+
+          for (let i = 0; i < d1.length; i++) {
+            data3.push({ No: i + 1 });
+          }
+          for (let k = 0; k < d2.length; k++) {
+            data3.push({ No: k + d1.length + 1 });
+          }
+
+          for (let j = 0; j < data3.length; j++) {
+            if (j < d1.length) {
+              for (let x = 0; x < cols3.length; x++) {
+                if (cols3[x] !== "No") {
+                  data3[j][cols3[x]] =
+                    d1[j][cols3[x]] !== undefined ? d1[j][cols3[x]] : "";
+                }
+              }
+            } else {
+              for (let x = 0; x < cols3.length; x++) {
+                if (cols3[x] !== "No") {
+                  data3[j][cols3[x]] =
+                    d2[j - d1.length][cols3[x]] !== undefined
+                      ? d2[j - d1.length][cols3[x]]
+                      : "";
+                }
+              }
+            }
+          }
+        }
+
+        deployData();
+      }
+    </script>
+  </body>
+</html>
