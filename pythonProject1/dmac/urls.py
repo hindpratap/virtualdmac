@@ -34,4 +34,5 @@ urlpatterns = [
     # path('save_json_to_table/', views.save_json_to_table, name ="save_json_to_table"),
 
 ]
+#comment
 # urlpatterns = router.urls
