@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 import pandas as pd
-import html5lib
-import requests
+# import html5lib
+# import requests
 from sqlalchemy import create_engine
 
 # from django.contrib.auth import login, logout, authenticate
@@ -77,7 +77,7 @@ def adminhome(request):
     # module_dict = json.dumps(module_dict)
     module_dict1 = json.dumps(module_dict1)
     try:
-        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
         df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';", con=engine)
         tablename_list = list(df_aws2["relname"])
         module_dict = tablename_list
@@ -100,7 +100,7 @@ def Table(request):
         {"id": "04", "name": "suresh"}
     ]
     try:
-        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
         # # df1.to_sql('dmac', engine, if_exists='append')
         l1 = pd.read_sql_query('select * from "legacytable1"', con=engine)
         l2 = pd.read_sql_query('select * from "legacytable1"', con=engine)
@@ -119,7 +119,7 @@ def Table(request):
 
 def merge_table(request):
     try:
-        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
         # l3.to_sql('legacytable3', engine,  if_exists='append')
         l1 = pd.read_sql_query('select * from "legacytable1"', con=engine)
         l2 = pd.read_sql_query('select * from "legacytable2"', con=engine)
@@ -152,7 +152,7 @@ def merge_table(request):
 
 def finaljson(request):
     try:
-        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
         # l3.to_sql('legacytable3', engine,  if_exists='append')
         l1 = pd.read_sql_query('select * from "legacytable1"', con=engine)
         l2 = pd.read_sql_query('select * from "legacytable2"', con=engine)
@@ -229,7 +229,7 @@ def finaljson(request):
 
 def posttable(request):
     module_dict={"0": "module 1", "1": "module 2", "2": "module3"}
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",con=engine)
     tablename_list = list(df_aws2["relname"])
     return render(request,'dmac/posttable.html',{'tablename_list':tablename_list,'module_dict':module_dict})
@@ -240,7 +240,7 @@ def post(request):
         # table_name = json.loads(table_name.body)
     print(table_name)
     module_dict={"0": "module 1", "1": "module 2", "2": "module3"}
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",con=engine)
     tablename_list = list(df_aws2["relname"])
     mainvalues=[]
@@ -328,7 +328,7 @@ def postdata(request):
         # table_name = json.loads(table_name.body)
     print(table_name)
     # table="your selected table:"+" "+table_name
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
                                 con=engine)
@@ -338,10 +338,10 @@ def postdata(request):
     mkt = l1.iloc[0:, 1:]
     dataft = mkt.to_json(orient='records')
     dataftj =json.loads(dataft)
-    values = [list(x.values()) for x in dataftj]
+    valueskit = [list(x.values()) for x in dataftj]
     # # get the column names
-    columns = [list(x.keys()) for x in dataftj][0]
-    return render(request,'dmac/login.html',{'tablename_list':tablename_list,'dataft':dataft,'columns':columns,'values':values})
+    columnskit = [list(x.keys()) for x in dataftj][0]
+    return render(request,'dmac/posttable.html',{'tablename_list':tablename_list,'dataft':dataft,'columnskit':columnskit,'valueskit':valueskit})
 
 
 # @api_view(["POST"])
@@ -373,7 +373,7 @@ def rest(request):
     maincolumns = []
     colfunctionlist = []
     module_dict = {"0": "module 1", "1": "module 2", "2": "module3"}
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     for i in range(len(lik)):
         l1 = pd.read_sql_query(f'select * from {lik[i]}', con=engine)
         mkt = l1.iloc[0:, 1:]
@@ -444,16 +444,16 @@ def rest(request):
 #     print(ckt)
 #     return render(request,'dmac/posttable.html')
 def thankyou(request):
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
                                 con=engine)
     tablename_list = list(df_aws2["relname"])
 
     # # l3.to_sql('legacytable3', engine,  if_exists='append')
-    l1 = pd.read_sql_query('select * from "saptable1" ', con=engine)
-    mkt = l1.iloc[0:, 1:]
-    data=mkt
+    # l1 = pd.read_sql_query('select * from "saptable1" ', con=engine)
+    # mkt = l1.iloc[0:, 1:]
+    # data=mkt
 
     # response = requests.get('http://127.0.0.1:8000/rest/')
     # tables = pd.read_html(r.text)
@@ -482,6 +482,14 @@ def thankyou(request):
     if request.method == "POST":
         tabl = request.POST.get('jsonData')
         rules = request.POST.getlist('rules')
+        desc = request.POST.get('desc')
+        fit = request.POST.get('fit')
+        spliter = request.POST.get('spliter')
+        concat = request.POST.get('concat')
+        resizer = request.POST.get('resizer')
+
+        # fit="NAME"
+        print(fit)
         print(rules)
         sit = json.loads(tabl)
         frame = pd.DataFrame(sit)
@@ -542,25 +550,31 @@ def thankyou(request):
         # table_name = json.loads(table_name.body)
     # print(type(plusdata))
     plusdata = listdf
-    plusdata.sort(key=lambda item: item.get("NAME"))
+    plusdata.sort(key=lambda item: item.get(fit))
     # print(plusdata)
 
 
     for i in range(len(plusdata) - 1):
-        if (plusdata[i]["NAME"] == plusdata[i + 1]["NAME"]):
+        if (plusdata[i][fit] == plusdata[i + 1][fit]):
                 plusdata[i].update(plusdata[i + 1])
 
         for i in range(len(plusdata) - 1):
-            if (plusdata[i]["NAME"] == plusdata[i + 1]["NAME"]):
+            if (plusdata[i][fit] == plusdata[i + 1][fit]):
                 plusdata[i].update(plusdata[i + 1])
                 plusdata[i + 1].update(plusdata[i])
         fitdata = list(unique_everseen(plusdata, key=lambda item: frozenset(item.items())))
         # print(fitdata)
         l1 = pd.DataFrame(fitdata)
 
-        print(l1)
-    try:
-        if rules[0]=="name_spliter":
+        # def stringify(x):
+        #     fd = x[0:10]
+        #     return fd
+        #
+        # l1["finalname"] = l1["NAME"].apply(stringify)
+        #
+        # print(l1)
+
+        if spliter!=None:
             def string_split(x):
                 fd = x.split(" ")
                 return fd[0]
@@ -575,8 +589,8 @@ def thankyou(request):
                     pass
 
             l1["last_name"] = l1["NAME"].apply(string_last)
-            table1 = l1.to_html()
-        elif rules[0]=="string resizer":
+
+        if resizer != None:
             def digit_tracker(x):
                 d = str(x)
                 k = len(d)
@@ -587,25 +601,28 @@ def thankyou(request):
                     spd = d[0:8]
                     return spd
 
-            l1['PHONE_new'] = l1['PHONE'].apply(digit_tracker)
-            table1 = l1.to_html()
+            l1['updated phone'] = l1['PHONE'].apply(digit_tracker)
+        if concat !=None:
+            l1["complete address"] = l1["ADDRESS 1"]+" "+l1["ADDRESS 2"]
 
-        elif rules[0]=="first+last":
-            l1["merge_two_column"] = l1["NAME"]+" "+l1["WERKS"]
-            table1= l1.to_html()
-        else:
-            table1 = l1.to_html()
-    except:
-        l1.to_sql('mckinsolteam', engine, if_exists='append')
+        # l1.to_sql(desc, engine, if_exists='append')
         table1 = l1.to_html()
+        kirs = l1.to_json(orient='records')
+        # colfunctionlist.append(dataft)
+        sk = json.loads(kirs)
+        val_1 = [list(x.values()) for x in sk]
+        # d_cities = dict.fromkeys(cities, 'UK')
+        col_1 = [list(x.keys()) for x in sk][0]
+
 
 
     # print(rules[0])
 
-    return HttpResponse(table1)
+    # return HttpResponse(table1)
         # concat = l1.to_json(orient='records')
         # final = json.loads(concat)
-    # return render(request,'dmac/thankyou.html',{'data':data})
+    return render(request,'dmac/login.html',{'val_1':val_1,'col_1':col_1})
+
 
 
 
@@ -615,7 +632,7 @@ def postdata1(request):
     if request.method == "POST":
         table_name1 = request.POST.get('table_name1')
         # table_name = json.loads(table_name.body)
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
                                 con=engine)
@@ -635,7 +652,7 @@ def postdata3(request):
     if request.method == "POST":
         table_name1 = request.POST.get('table_name1')
         # table_name = json.loads(table_name.body)
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
                                 con=engine)
@@ -661,7 +678,7 @@ def addtable(request):
         # print(table1)
         # print(table2)
 
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     # l3.to_sql('legacytable3', engine,  if_exists='append')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
                                 con=engine)
@@ -721,7 +738,7 @@ def concatdata(request):
             print(table1)
             print(table2)
 
-        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
         # l3.to_sql('legacytable3', engine,  if_exists='append')
         l1 = pd.read_sql_query(f'select * from {table1}', con=engine)
         l2 = pd.read_sql_query(f'select * from {table2}', con=engine)
@@ -764,7 +781,7 @@ def dragdrop(request):
         lik = list(dim)
 
         # table="your selected table:"+" "+table_name
-        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
         # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
         df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
                                     con=engine)
@@ -794,7 +811,7 @@ def dragdrop(request):
     return render(request, 'dmac/login.html',{'columnsld':columnsld,'valuesld':valuesld,'tablename_list':tablename_list})
 
 def dmacpage(request):
-    engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
     df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",con=engine)
     tablename_list = list(df_aws2["relname"])
     return render(request,'dmac/dmac.html',{'tablename_list':tablename_list})
@@ -893,3 +910,27 @@ def dmacpage(request):
 
 def tables(request):
     return render(request,'dmac/table.html')
+
+
+def connections(request):
+    if request.method == "POST":
+        host = request.POST.get('host')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        database = request.POST.get('database')
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=username,
+            password=password)
+        print(conn)
+        engine = create_engine(f'postgresql://postgres:{password}@localhost:5432/{database}')
+        df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
+                                    con=engine)
+        tablename_list = list(df_aws2["relname"])
+        print(tablename_list)
+        strl="connection successful....."
+
+
+
+    return render(request,'dmac/login.html',{'tablename_list':tablename_list,'strl':strl})
