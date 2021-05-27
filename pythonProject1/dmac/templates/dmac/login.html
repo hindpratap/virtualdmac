@@ -1,50 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+{% extends 'base.html' %}
+{% load static %}
 
-    <title>Dmac_Thankyou</title>
-    <style>
-        h1{
-            text-align: center;
-            color: blue;
-            font-size: 10rem;
-            font-weight:900 ;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        h3{
-            text-align: center;
-            color: green;
-            font-size: 5rem;
-            font-weight:900 ;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body{
-            background-color: rgb(199, 243, 236);
-        }
-    </style>
-</head>
-<body>
-  <u> <h1>Thankyou !</h1></u>
-<h3><b>your table is stored in database!</b></h3>
-  <center>
-      <div style="overflow-x:auto;overflow-y:auto; height:350px;">
-<table class="table table-hover">
-        {% for i in col_1 %}
-        <th>{{ i }}</th>{% endfor %}
-        {% for j in val_1 %}
-        <tr> {% for k in j %}
-          <td>{{ k }}</td>{% endfor %}
-        </tr>
+{% block head %}
+<link rel="stylesheet" href="{% static 'adminboard/css/login.css' %}">
+{% endblock %}
 
-        {% endfor %}
-
-      </table></center>
-</div>
-
-</body>
-</html>
+{% block body %}
+  <div class="w-full relative overflow-hidden h-screen flex">
+    <div class="polygon-hero absolute">
+    </div>
+    <div class="polygon-page relative border border-solid border-suvaGrey rounded-lg md:rounded-none px-4 py-4 md:border-0 flex flex-col justify-center md:w-3/5 lg:py-8 lg:pl-8 lg:pr-10 bg-no-repeat">
+      <div class="absolute top-8 left-8">
+        <img src="{% static 'img/mckinsol-logo.png' %}" alt="logo" class="w-36 h-12 md:w-72 md:h-24">
+      </div>
+      <div class="z-10">
+        <h3 class="text-7xl md:text-9xl font-bold w-3/4 text-gray-800 font-serif">DMAC</h3>
+        <p class="text-lg md:text-2xl md:tracking-widest font-semibold">Data Migration Agile Connector</p>
+        <a href="{% url 'dmac:posttable' %}" class="inline-flex px-4 py-3 items-center bg-indigo-600 text-white text-base md:text-lg rounded-lg mt-4">Sign in with Google</a>
+      </div>
+      <footer class="absolute bottom-8 left-8 font-semibold text-sm md:text-base">
+        <span>&copy; 2021 Copyright: </span>
+        <span class="text-green-600">McKinsol Consulting Inc.</span>
+      </footer>
+    </div>
+  <div>
+{% endblock %}

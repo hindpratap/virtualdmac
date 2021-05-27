@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Dmac_Thankyou</title>
+    <style>
+        h1{
+            text-align: center;
+            color: blue;
+            font-size: 10rem;
+            font-weight:900 ;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h3{
+            text-align: center;
+            color: green;
+            font-size: 5rem;
+            font-weight:900 ;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body{
+            background-color: rgb(199, 243, 236);
+        }
+    </style>
+</head>
+<body>
+  <u> <h1>Thankyou !</h1></u>
+<h3><b>your table is stored in database!</b></h3>
+  <center>
+      <div style="overflow-x:auto;overflow-y:auto; height:350px;">
+<table class="table table-hover">
+        {% for i in col_1 %}
+        <th>{{ i }}</th>{% endfor %}
+        {% for j in val_1 %}
+        <tr> {% for k in j %}
+          <td>{{ k }}</td>{% endfor %}
+        </tr>
+
+        {% endfor %}
+
+      </table></center>
+</div>
+
+</body>
+</html>

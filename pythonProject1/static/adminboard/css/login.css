@@ -1,0 +1,38 @@
+.polygon-hero {
+  height: 400%;
+  width: 400%;
+  top: -25%;
+  left: -100%;
+  background-size: 800px auto;
+  color: var(--neutralDark);
+  background-image: url("../../img/Data-connector.svg");
+  will-change: transform;
+  z-index: 0;
+}
+
+.polygon-page {
+  background-image: url("../../img/polygon.svg");
+  background-size: 100% auto;
+  background-position: -5px -5px;
+  min-width: 40rem;
+  filter: drop-shadow(10px -10px 8px rgba(0, 0, 0, 0.5));
+  min-height: 60vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .polygon-page {
+    background: transparent;
+  }
+
+  .polygon-page::before {
+    content: '';
+    background: #fff;
+    display: block;
+    width: 54%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+}

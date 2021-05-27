@@ -45,7 +45,7 @@ import json
 #     {id:"04",phone:"4545455"}
 # ]
 def loginpage(request):
-    return render(request,'dmac/index.html')
+    return render(request,'dmac/login.html')
 
 # def logout(request):
 #     loggout(request)
@@ -89,7 +89,7 @@ def adminhome(request):
     # data1=df_aws1.to_json(orient='records')
 
     print("Hello Hind this is your updated dataframe of D-mac")
-    return render(request,'dmac/login.html',{'tablename_list':tablename_list,'module_dict1':module_dict1,'module_dict11':module_dict11})
+    return render(request,'dmac/login-2.html',{'tablename_list':tablename_list,'module_dict1':module_dict1,'module_dict11':module_dict11})
 
 
 def Table(request):
@@ -621,7 +621,7 @@ def thankyou(request):
     # return HttpResponse(table1)
         # concat = l1.to_json(orient='records')
         # final = json.loads(concat)
-    return render(request,'dmac/login.html',{'val_1':val_1,'col_1':col_1})
+    return render(request,'dmac/login-2.html',{'val_1':val_1,'col_1':col_1})
 
 
 
@@ -645,7 +645,7 @@ def postdata1(request):
     values1 = [list(x.values()) for x in dataftj1]
     # # get the column names
     columns1 = [list(x.keys()) for x in dataftj1][0]
-    return render(request,'dmac/login.html',{'tablename_list':tablename_list,'dataft1':dataft1,'columns1':columns1,'values1':values1})
+    return render(request,'dmac/login-2.html',{'tablename_list':tablename_list,'dataft1':dataft1,'columns1':columns1,'values1':values1})
 
 def postdata3(request):
     # try:
@@ -666,7 +666,7 @@ def postdata3(request):
     # # get the column names
     columnsx = [list(x.keys()) for x in dataftj1][0]
     # return redirect('dmac:adminhome',{columnsx,valuesx})
-    return render(request,'dmac/login.html',{'tablename_list':tablename_list,'dataft1':dataft1,'columnsx':columnsx,'valuesx':valuesx})
+    return render(request,'dmac/login-2.html',{'tablename_list':tablename_list,'dataft1':dataft1,'columnsx':columnsx,'valuesx':valuesx})
 
 
 
@@ -722,7 +722,7 @@ def addtable(request):
     #         lists.append(j + "_" + (table_name[i]))
     module_dict = json.dumps(lists)
 
-    return render(request,'dmac/login.html',{'merg1':merg1,'concat':concat,'tablename_list':tablename_list,'columns2':columns2,'values2':values2,'module_dict':module_dict})
+    return render(request,'dmac/login-2.html',{'merg1':merg1,'concat':concat,'tablename_list':tablename_list,'columns2':columns2,'values2':values2,'module_dict':module_dict})
 
 
 
@@ -808,7 +808,7 @@ def dragdrop(request):
         valuesld = [list(x.values()) for x in dataftj]
         # # # get the column names
         columnsld = [list(x.keys()) for x in dataftj][0]
-    return render(request, 'dmac/login.html',{'columnsld':columnsld,'valuesld':valuesld,'tablename_list':tablename_list})
+    return render(request, 'dmac/login-2.html',{'columnsld':columnsld,'valuesld':valuesld,'tablename_list':tablename_list})
 
 def dmacpage(request):
     engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
@@ -933,4 +933,4 @@ def connections(request):
 
 
 
-    return render(request,'dmac/login.html',{'tablename_list':tablename_list,'strl':strl})
+    return render(request,'dmac/login-2.html',{'tablename_list':tablename_list,'strl':strl})
