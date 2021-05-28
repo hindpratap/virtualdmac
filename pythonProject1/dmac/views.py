@@ -395,23 +395,32 @@ def rest(request):
 
 
         # table_name = json.loads(table_name.body)
+    try:
+        mainvalues = []
+        maincolumns = []
+        colfunctionlist = []
+        module_dict = {"0": "module 1", "1": "module 2", "2": "module3"}
+        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        for i in range(len(lik)):
+            l1 = pd.read_sql_query(f'select * from {lik[i]}', con=engine)
+            mkt = l1.iloc[0:, 1:]
+            dataft = mkt.to_json(orient='records')
+            colfunctionlist.append(dataft)
+            s1 = json.loads(dataft)
+            valuess1 = [list(x.values()) for x in s1]
+            # d_cities = dict.fromkeys(cities, 'UK')
+            mainvalues.append(valuess1)
+            columnss1 = [list(x.keys()) for x in s1][0]
+            maincolumns.append(columnss1)
 
-    mainvalues = []
-    maincolumns = []
-    colfunctionlist = []
+    except:
+
+        maincolumns=[['NAME', 'DESIGNATION', 'Emp_ID', 'JOINING YEAR'], ['NAME', 'DESIGNATION', 'Emp_ID', 'JOINING YEAR']]
+        mainvalues=[[['Niranjan Pandit', 'A', 'McK_11', 2018], ['Chanchal Gupta', 'B', 'McK_21', 2019], ['Gaurav Dubey', 'C', 'McK_31', 2021], ['Sunpreet Arora', 'D', 'McK_22', 2018],['Kartika', 'E', 'McK_25', 2017], ['Jatinder Jha', 'F', 'McK_36', 2020], ['Mayank Bhadoria', 'G', 'McK_17', 2021]], [['Abhinav Asati', 'Senior Developer', 'McK_1', 2018], ['Kuldeep kumar', 'Full Stack Developer', 'McK_2', 2019], ['Vikash singh', 'Backend Developer', 'McK_3', 2021], ['Sukirti Mishra', 'frontend developer', 'McK_4', 2018], ['Chandan Panday', 'Backend Developer', 'McK_5', 2017], ['Kartik Chauhan', 'Backend Developer', 'McK_6', 2020], ['Hind Pratap Singh', 'Backend Developer','McK_7', 2021], ['Uma Chaudhary', 'frontend developer', 'McK_8', 2019], ['Vishal Sagar', 'frontend developer', 'McK_9', 2019], ['Vishal Yadav', 'Full Stack Developer', 'McK_10', 2020]]]
+
+        colfunctionlist=['[{"NAME":"Niranjan Pandit","DESIGNATION":"A","Emp_ID":"McK_11","JOINING YEAR":2018},{"NAME":"Chanchal Gupta","DESIGNATION":"B","Emp_ID":"McK_21","JOINING YEAR":2019},{"NAME":"Gaurav Dubey","DESIGNATION":"C","Emp_ID":"McK_31","JOINING YEAR":2021},{"NAME":"Sunpreet Arora","DESIGNATION":"D","Emp_ID":"McK_22","JOINING YEAR":2018},{"NAME":"Kartika","DESIGNATION":"E","Emp_ID":"McK_25","JOINING YEAR":2017},{"NAME":"Jatinder Jha","DESIGNATION":"F","Emp_ID":"McK_36","JOINING YEAR":2020},{"NAME":"Mayank Bhadoria","DESIGNATION":"G","Emp_ID":"McK_17","JOINING YEAR":2021}]', '[{"NAME":"Abhinav Asati","DESIGNATION":"Senior Developer","Emp_ID":"McK_1","JOINING YEAR":2018},{"NAME":"Kuldeep kumar","DESIGNATION":"Full Stack Developer","Emp_ID":"McK_2","JOINING YEAR":2019},{"NAME":"Vikash singh","DESIGNATION":"Backend Developer","Emp_ID":"McK_3","JOINING YEAR":2021},{"NAME":"Sukirti Mishra","DESIGNATION":"frontend developer","Emp_ID":"McK_4","JOINING YEAR":2018},{"NAME":"Chandan Panday","DESIGNATION":"Backend Developer","Emp_ID":"McK_5","JOINING YEAR":2017},{"NAME":"Kartik Chauhan","DESIGNATION":"Backend Developer","Emp_ID":"McK_6","JOINING YEAR":2020},{"NAME":"Hind Pratap Singh","DESIGNATION":"Backend Developer","Emp_ID":"McK_7","JOINING YEAR":2021},{"NAME":"Uma Chaudhary","DESIGNATION":"frontend developer","Emp_ID":"McK_8","JOINING YEAR":2019},{"NAME":"Vishal Sagar","DESIGNATION":"frontend developer","Emp_ID":"McK_9","JOINING YEAR":2019},{"NAME":"Vishal Yadav","DESIGNATION":"Full Stack Developer","Emp_ID":"McK_10","JOINING YEAR":2020}]']
+
     module_dict = {"0": "module 1", "1": "module 2", "2": "module3"}
-    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
-    for i in range(len(lik)):
-        l1 = pd.read_sql_query(f'select * from {lik[i]}', con=engine)
-        mkt = l1.iloc[0:, 1:]
-        dataft = mkt.to_json(orient='records')
-        colfunctionlist.append(dataft)
-        s1 = json.loads(dataft)
-        valuess1 = [list(x.values()) for x in s1]
-        # d_cities = dict.fromkeys(cities, 'UK')
-        mainvalues.append(valuess1)
-        columnss1 = [list(x.keys()) for x in s1][0]
-        maincolumns.append(columnss1)
     d_columns = dict(zip(lik, maincolumns))
     d_values = dict(zip(lik, mainvalues))
     manag = [1, 2]
@@ -421,25 +430,34 @@ def rest(request):
     tab1 = colfunctionlist[0]
     tab2 = colfunctionlist[1]
 
-    lists = []
 
-    for i in range(len(lik)):
-        l1 = pd.read_sql_query(f'select * from {lik[i]}', con=engine)
-        mkt = l1.iloc[0:, 1:]
-        dataft = mkt.to_json(orient='records')
-        dataftj = json.loads(dataft)
-        # values = [list(x.values()) for x in dataftj]
-        # # get the column names
-        columns = [list(x.keys()) for x in dataftj][0]
-        for j in columns:
-            lists.append(j + "_" + (lik[i]))
+    try:
+        lists = []
+
+        for i in range(len(lik)):
+            l1 = pd.read_sql_query(f'select * from {lik[i]}', con=engine)
+            mkt = l1.iloc[0:, 1:]
+            dataft = mkt.to_json(orient='records')
+            dataftj = json.loads(dataft)
+            # values = [list(x.values()) for x in dataftj]
+            # # get the column names
+            columns = [list(x.keys()) for x in dataftj][0]
+            for j in columns:
+                lists.append(j + "_" + (lik[i]))
+    except:
+        lists = ['NAME_sapteam', 'DESIGNATION_sapteam', 'Emp_ID_sapteam', 'JOINING YEAR_sapteam','NAME_developmentteam', 'DESIGNATION_developmentteam', 'Emp_ID_developmentteam','JOINING YEAR_developmentteam']
+        print(lists)
+
 
     # table="your selected table:"+" "+table_name
 
     # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
-    df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
-                                con=engine)
-    tablename_list = list(df_aws2["relname"])
+    try:
+        df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
+                                    con=engine)
+        tablename_list = list(df_aws2["relname"])
+    except:
+        tablename_list = ['table1', 'table2','table3']
 
     # # # l3.to_sql('legacytable3', engine,  if_exists='append')
     # l1 = pd.read_sql_query(f'select * from {lik[0]}', con=engine)
@@ -471,11 +489,14 @@ def rest(request):
 #     print(ckt)
 #     return render(request,'dmac/posttable.html')
 def thankyou(request):
-    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
-    # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
-    df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
-                                con=engine)
-    tablename_list = list(df_aws2["relname"])
+    try:
+        engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
+                                    con=engine)
+        tablename_list = list(df_aws2["relname"])
+    except:
+        tablename_list = ['table1', 'table2','table3']
 
     # # l3.to_sql('legacytable3', engine,  if_exists='append')
     # l1 = pd.read_sql_query('select * from "saptable1" ', con=engine)
