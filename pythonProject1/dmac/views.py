@@ -355,20 +355,26 @@ def postdata(request):
         # table_name = json.loads(table_name.body)
     print(table_name)
     # table="your selected table:"+" "+table_name
-    engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
-    # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
-    df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
-                                con=engine)
-    tablename_list = list(df_aws2["relname"])
-    # l3.to_sql('legacytable3', engine,  if_exists='append')
-    l1 = pd.read_sql_query(f'select * from {table_name}', con=engine)
-    mkt = l1.iloc[0:, 1:]
-    dataft = mkt.to_json(orient='records')
-    dataftj =json.loads(dataft)
-    valueskit = [list(x.values()) for x in dataftj]
-    # # get the column names
-    columnskit = [list(x.keys()) for x in dataftj][0]
-    return render(request,'dmac/posttable.html',{'tablename_list':tablename_list,'dataft':dataft,'columnskit':columnskit,'valueskit':valueskit})
+    try:
+        engine = create_engine('postgresql://postgres:Programming1234@localhost:5432/postgres')
+        # engine = create_engine('postgresql://postgres:Programming123@localhost:5432/postgres')
+        df_aws2 = pd.read_sql_query("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';",
+                                    con=engine)
+        tablename_list = list(df_aws2["relname"])
+
+        # l3.to_sql('legacytable3', engine,  if_exists='append')
+        l1 = pd.read_sql_query(f'select * from {table_name}', con=engine)
+        mkt = l1.iloc[0:, 1:]
+        dataft = mkt.to_json(orient='records')
+        dataftj =json.loads(dataft)
+        valueskit = [list(x.values()) for x in dataftj]
+        # # get the column names
+        columnskit = [list(x.keys()) for x in dataftj][0]
+    except:
+        tablename_list = ['table1', 'table2','table3']
+        columnskit=['NAME', 'DESIGNATION', 'Emp_ID', 'JOINING YEAR']
+        valueskit=[['Niranjan Pandit', 'A', 'McK_11', 2018], ['Chanchal Gupta', 'B', 'McK_21', 2019], ['Gaurav Dubey', 'C', 'McK_31', 2021], ['Sunpreet Arora', 'D', 'McK_22', 2018],['Kartika', 'E', 'McK_25', 2017], ['Jatinder Jha', 'F', 'McK_36', 2020], ['Mayank Bhadoria', 'G', 'McK_17', 2021]]
+    return render(request,'dmac/posttable.html',{'tablename_list':tablename_list,'columnskit':columnskit,'valueskit':valueskit})
 
 
 # @api_view(["POST"])
